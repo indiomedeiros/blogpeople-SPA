@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <div className=" flex flex-col max-w mx-auto min-h-screen">
           <Header />
-          <div className="flex-1 bg-gray-50">
+          <div className="flex-1 bg-gray-50 flex md:items-center ">
             <Routes>
               <Route path="/" element={<FeedPage />} />
               <Route path="/auth" element={<AuthPage />} />

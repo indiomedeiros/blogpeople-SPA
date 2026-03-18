@@ -10,6 +10,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { postRquest } from "../Services/Service";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+import bgAuth from "../assets/bg-auth.svg";
 
 function AuthPage() {
   const navigate = useNavigate();
@@ -64,134 +65,149 @@ function AuthPage() {
   }
 
   return (
-    <section className="grid grid-cols-1 m-4 shadow-2xl p-8 boder bg-white border-gray-50 rounded-xl gap-6">
-      <div>
-        <h2 className="text-2xl font-bold">Bem-vindo de volta!</h2>
-        <p className="text-gray-500">
-          Entre na sua conta para continuar lendo e escrevendo
+    <section className="grid grid-cols-1 md:grid-cols-2  m-4 shadow-2xl p-8 md:p-0 boder bg-white border-gray-50 rounded-xl gap-8 lg:mx-auto lg:max-w-5xl ">
+      <div className="rounded-bl-2xl rounded-tl-2xl  md:flex md: flex-col hidden  md:p-8 md:py-15 lg:py-10  bg-blue-100 md:gap-4">
+        <h2 className=" md:text-4xl font-bold lg:text-3xl">
+          Transforme suas ideias em palavras.
+        </h2>
+        <p className="text-gray-600 md:text-2xl lg:text-xl">
+          Junte-se a nossa comunidade de escritores e leitores apaixonados.
+          Compartilhe sua jornada com o mundo.
         </p>
+        <img className=" lg:mx-auto  lg:w-2xl" src={bgAuth} alt="" />
       </div>
 
-      <div className="flex gap-6 border-b border-gray-200 font-bold text-gray-500 text-sm">
-        <button
-          className={`pb-3 border-b-2 ${
-            activeTab === "login"
-              ? "border-blue-600 text-blue-600"
-              : "border-transparent hover:text-blue-600 hover:border-blue-600"
-          } transition duration-300`}
-          onClick={() => setActiveTab("login")}
-        >
-          Login
-        </button>
+      <div className="flex flex-col gap-6 md:p-8 md:py-15">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl md:text-3xl  font-bold">
+            Bem-vindo de volta!
+          </h2>
+          <p className="text-gray-500 md:text-lg ">
+            Entre na sua conta para continuar lendo e escrevendo
+          </p>
+        </div>
 
-        <button
-          className={`pb-3 border-b-2 ${
-            activeTab === "cadastro"
-              ? "border-blue-600 text-blue-600"
-              : "border-transparent hover:text-blue-600 hover:border-blue-600"
-          } transition duration-300`}
-          onClick={() => setActiveTab("cadastro")}
-        >
-          Cadastro
-        </button>
-      </div>
+        <div className="flex gap-6 border-b border-gray-200 font-bold text-gray-500 text-sm md:text-shadow-md">
+          <button
+            className={`pb-3 border-b-2 ${
+              activeTab === "login"
+                ? "border-blue-600 text-blue-600"
+                : "border-transparent hover:text-blue-600 hover:border-blue-600"
+            } transition duration-300`}
+            onClick={() => setActiveTab("login")}
+          >
+            Login
+          </button>
 
-      <form
-        onSubmit={sendDataForAuthorization}
-        className="flex flex-col text-gray-700 font-medium text-sm gap-6"
-      >
-        {activeTab === "cadastro" && (
+          <button
+            className={`pb-3 border-b-2 ${
+              activeTab === "cadastro"
+                ? "border-blue-600 text-blue-600"
+                : "border-transparent hover:text-blue-600 hover:border-blue-600"
+            } transition duration-300`}
+            onClick={() => setActiveTab("cadastro")}
+          >
+            Cadastro
+          </button>
+        </div>
+
+        <form
+          onSubmit={sendDataForAuthorization}
+          className="flex flex-col text-gray-700 font-medium text-sm gap-6 lg:gap-4"
+        >
+          {activeTab === "cadastro" && (
+            <div className="flex flex-col  gap-2">
+              <label htmlFor="nome">Nome</label>
+              <input
+                id="nome"
+                type="text"
+                name="nome"
+                value={user.nome}
+                onChange={(e) => handleInputChange(e)}
+                placeholder="Digite o seu nome"
+                className="border rounded border-gray-300 p-3.5"
+                required
+              />
+            </div>
+          )}
+
+          {activeTab === "cadastro" && (
+            <div className="flex flex-col  gap-2">
+              <label htmlFor="foto">foto</label>
+              <input
+                id="foto"
+                type="url"
+                name="foto"
+                value={user.foto}
+                onChange={(e) => handleInputChange(e)}
+                placeholder="https://foto.jpg"
+                className="border rounded border-gray-300 p-3.5"
+              />
+            </div>
+          )}
+
           <div className="flex flex-col  gap-2">
-            <label htmlFor="nome">Nome</label>
+            <label htmlFor="email">E-mail</label>
             <input
-              id="nome"
-              type="text"
-              name="nome"
-              value={user.nome}
+              id="email"
+              type="email"
+              name="usuario"
+              value={user.usuario}
               onChange={(e) => handleInputChange(e)}
-              placeholder="Digite o seu nome"
+              placeholder="seu@email.com"
               className="border rounded border-gray-300 p-3.5"
               required
             />
           </div>
-        )}
 
-        {activeTab === "cadastro" && (
-          <div className="flex flex-col  gap-2">
-            <label htmlFor="foto">foto</label>
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-between">
+              <label htmlFor="password">Senha</label>
+              {activeTab === "login" && (
+                <a className="text-blue-600 " href="">
+                  Esqueci minha senha
+                </a>
+              )}
+            </div>
             <input
-              id="foto"
-              type="url"
-              name="foto"
-              value={user.foto}
+              id="passsowrd"
+              type="password"
+              name="senha"
+              value={user.senha}
               onChange={(e) => handleInputChange(e)}
-              placeholder="https://foto.jpg"
+              placeholder="********"
               className="border rounded border-gray-300 p-3.5"
+              required
             />
-          </div>
-        )}
-
-        <div className="flex flex-col  gap-2">
-          <label htmlFor="email">E-mail</label>
-          <input
-            id="email"
-            type="email"
-            name="usuario"
-            value={user.usuario}
-            onChange={(e) => handleInputChange(e)}
-            placeholder="seu@email.com"
-            className="border rounded border-gray-300 p-3.5"
-            required
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between">
-            <label htmlFor="password">Senha</label>
-            {activeTab === "login" && (
-              <a className="text-blue-600 " href="">
-                Esqueci minha senha
-              </a>
+            {error && activeTab === "login" && (
+              <p className="text-red-600">Usuário ou senha inválidos.</p>
+            )}
+            {errorSignup && activeTab === "cadastro" && (
+              <p className="text-red-600">Tente um outro e-mail.</p>
             )}
           </div>
-          <input
-            id="passsowrd"
-            type="password"
-            name="senha"
-            value={user.senha}
-            onChange={(e) => handleInputChange(e)}
-            placeholder="********"
-            className="border rounded border-gray-300 p-3.5"
-            required
-          />
-          {error && activeTab === "login" && (
-            <p className="text-red-600">Usuário ou senha inválidos.</p>
-          )}
-          {errorSignup && activeTab === "cadastro" && (
-            <p className="text-red-600">Tente um outro e-mail.</p>
-          )}
-        </div>
 
-        {activeTab === "login" && (
-          <div className="flex gap-2 ">
-            <input
-              id="remenber"
-              type="checkbox"
-              onChange={(e) => setRemenber(e.target.checked)}
-              className="accent-blue-700"
-            />
-            <label htmlFor="remenber">Lembrar de min</label>
-          </div>
-        )}
-
-        <button className="bg-blue-600 text-white rounded p-3.5 shadow-md shadow-gray-400">
-          {isLoading || isLoadingSignup ? (
-            <ClipLoader color="#ffffff" size={16} />
-          ) : (
-            "Entrar na plataforma"
+          {activeTab === "login" && (
+            <div className="flex gap-2 ">
+              <input
+                id="remenber"
+                type="checkbox"
+                onChange={(e) => setRemenber(e.target.checked)}
+                className="accent-blue-700"
+              />
+              <label htmlFor="remenber">Lembrar de min</label>
+            </div>
           )}
-        </button>
-      </form>
+
+          <button className="bg-blue-600 text-white rounded p-3.5 shadow-md shadow-gray-400">
+            {isLoading || isLoadingSignup ? (
+              <ClipLoader color="#ffffff" size={16} />
+            ) : (
+              "Entrar na plataforma"
+            )}
+          </button>
+        </form>
+      </div>
     </section>
   );
 }

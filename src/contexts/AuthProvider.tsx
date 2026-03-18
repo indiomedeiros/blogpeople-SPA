@@ -33,6 +33,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       foto: "",
       token: "",
     });
+    localStorage.removeItem("token");
   }
 
   return (

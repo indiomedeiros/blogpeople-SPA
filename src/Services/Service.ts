@@ -14,11 +14,13 @@ export async function getRquest<T>(
 export async function postRquest<T>(
   url: string,
   data: object,
-  setData: Dispatch<SetStateAction<T>>,
+  setData?: Dispatch<SetStateAction<T>>,
   header?: object,
 ): Promise<void> {
   const response: AxiosResponse = await api.post(url, data, header);
-  setData(response.data);
+  if (setData !== undefined) {
+    setData(response.data);
+  }
 }
 
 export async function updateRequest<T>(

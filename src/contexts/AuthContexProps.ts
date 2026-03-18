@@ -1,7 +1,8 @@
 import type UserLogin from "../models/UserLogin";
 
 export interface AuthContextProps {
-  usuario: UserLogin;
+  userLogged: UserLogin;
+  error?: string;
   handleLogout(): void;
   handleLogin(usuario: UserLogin): Promise<void>;
   isLoading: boolean;

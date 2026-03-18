@@ -5,21 +5,27 @@ import { postRquest } from "../Services/Service";
 import { AuthContext } from "./AuthContext";
 
 function AuthProvider({ children }: AuthProviderProps) {
-  const [usuario, setUser] = useState<UserLogin>({} as UserLogin);
+  const [userLogged, setUserLogged] = useState<UserLogin>({} as UserLogin);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
 
   async function handleLogin(userLogin: UserLogin) {
     setIsLoading(true);
+
     try {
-      await postRquest("/usuarios/logar", userLogin, setUser);
+      await postRquest("/usuarios/logar", userLogin, setUserLogged);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Erro desconhecido");
+      }
     }
     setIsLoading(false);
   }
 
   function handleLogout() {
-    setUser({
+    setUserLogged({
       id: 0,
       nome: "",
       usuario: "",
@@ -31,7 +37,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ usuario, handleLogin, handleLogout, isLoading }}
+      value={{ userLogged, error, handleLogin, handleLogout, isLoading }}
     >
       {children}
     </AuthContext.Provider>

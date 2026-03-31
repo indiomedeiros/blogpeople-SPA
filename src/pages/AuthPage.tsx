@@ -11,6 +11,9 @@ import { postRquest } from "../Services/Service";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import bgAuth from "../assets/bg-auth.svg";
+import submitIcon from "../assets/submitIcon.svg";
+import emailIcon from "../assets/emailIcon.svg";
+import passwordIcon from "../assets/passwordIcon.svg";
 
 function AuthPage() {
   const navigate = useNavigate();
@@ -150,18 +153,25 @@ function AuthPage() {
             </div>
           )}
 
-          <div className="flex flex-col  gap-2">
+          <div className="flex flex-col  gap-2 ">
             <label htmlFor="email">E-mail</label>
-            <input
-              id="email"
-              type="email"
-              name="usuario"
-              value={user.usuario}
-              onChange={(e) => handleInputChange(e)}
-              placeholder="seu@email.com"
-              className="border rounded border-gray-300 p-3.5"
-              required
-            />
+            <div className=" flex flex-col relative">
+              <input
+                id="email"
+                type="email"
+                name="usuario"
+                value={user.usuario}
+                onChange={(e) => handleInputChange(e)}
+                placeholder="        seu@email.com"
+                className="border rounded border-gray-300 p-3.5"
+                required
+              />
+              <img
+                className="absolute left-4 top-3"
+                src={emailIcon}
+                alt="desenho de um cadeado"
+              />
+            </div>
           </div>
 
           <div className="flex flex-col gap-2">
@@ -173,16 +183,25 @@ function AuthPage() {
                 </a>
               )}
             </div>
-            <input
-              id="passsowrd"
-              type="password"
-              name="senha"
-              value={user.senha}
-              onChange={(e) => handleInputChange(e)}
-              placeholder="********"
-              className="border rounded border-gray-300 p-3.5"
-              required
-            />
+
+            <div className="relative flex flex-col">
+              <input
+                id="passsowrd"
+                type="password"
+                name="senha"
+                value={user.senha}
+                onChange={(e) => handleInputChange(e)}
+                placeholder="       ********"
+                className="border rounded border-gray-300 p-3.5"
+                required
+              />
+              <img
+                className="absolute left-4  top-3"
+                src={passwordIcon}
+                alt="desenho de um cadeado"
+              />
+            </div>
+
             {error && activeTab === "login" && (
               <p className="text-red-600">Usuário ou senha inválidos.</p>
             )}
@@ -203,12 +222,13 @@ function AuthPage() {
             </div>
           )}
 
-          <button className="bg-blue-600 text-white rounded p-3.5 shadow-md shadow-gray-400">
+          <button className=" flex justify-center gap-3 bg-blue-600 text-white rounded p-3.5 shadow-md shadow-gray-400">
             {isLoading || isLoadingSignup ? (
               <ClipLoader color="#ffffff" size={16} />
             ) : (
               "Entrar na plataforma"
             )}
+            <img src={submitIcon} alt="" />
           </button>
         </form>
       </div>

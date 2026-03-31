@@ -65,21 +65,25 @@ function AuthPage() {
   }
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2  m-4 shadow-2xl p-8 md:p-0 boder bg-white border-gray-50 rounded-xl gap-8 lg:mx-auto lg:max-w-5xl ">
-      <div className="rounded-bl-2xl rounded-tl-2xl  md:flex md: flex-col hidden  md:p-8 md:py-15 lg:py-10  bg-blue-100 md:gap-4">
-        <h2 className=" md:text-4xl font-bold lg:text-3xl">
+    <section className=" font-sans grid grid-cols-1 md:grid-cols-2  m-4 md:mx-8 md:my-21 shadow-2xl p-8 md:p-0 boder bg-white border-gray-50 rounded-xl gap-8 md:gap-0 xl:mx-auto xl:max-w-250 md:h-164 xl:h-156 xl:mt-">
+      <div className="rounded-bl-2xl rounded-tl-2xl  md:flex md:flex-col hidden xl:py-15 md:p-12 xl:p-12  bg-blue-100 md:gap-4 xl:gap-6">
+        <h2 className=" md:text-[2rem] font-bold xl:text-3xl">
           Transforme suas ideias em palavras.
         </h2>
-        <p className="text-gray-600 md:text-2xl lg:text-xl">
+        <p className="text-gray-600 md:text-[1.4rem] xl:text-lg">
           Junte-se a nossa comunidade de escritores e leitores apaixonados.
           Compartilhe sua jornada com o mundo.
         </p>
-        <img className=" lg:mx-auto  lg:w-2xl" src={bgAuth} alt="" />
+        <img
+          className=" md:size-64 xl:size-80 xl:mx-auto  xl:w-xs "
+          src={bgAuth}
+          alt=""
+        />
       </div>
 
-      <div className="flex flex-col gap-6 md:p-8 md:py-15">
+      <div className="flex flex-col gap-6 md:p-12 md:w-full xl:py-15 bg-white ">
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl md:text-3xl  font-bold">
+          <h2 className="text-2xl md:text-[1.6rem]  font-bold">
             Bem-vindo de volta!
           </h2>
           <p className="text-gray-500 md:text-lg ">
@@ -113,7 +117,7 @@ function AuthPage() {
 
         <form
           onSubmit={sendDataForAuthorization}
-          className="flex flex-col text-gray-700 font-medium text-sm gap-6 lg:gap-4"
+          className="flex flex-col text-gray-700 font-medium text-sm gap-6 xl:gap-4 w-full"
         >
           {activeTab === "cadastro" && (
             <div className="flex flex-col  gap-2">
@@ -125,7 +129,7 @@ function AuthPage() {
                 value={user.nome}
                 onChange={(e) => handleInputChange(e)}
                 placeholder="Digite o seu nome"
-                className="border rounded border-gray-300 p-3.5"
+                className="border rounded border-gray-300 p-3.5 "
                 required
               />
             </div>

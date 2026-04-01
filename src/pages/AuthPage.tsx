@@ -14,6 +14,9 @@ import bgAuth from "../assets/bg-auth.svg";
 import submitIcon from "../assets/submitIcon.svg";
 import emailIcon from "../assets/emailIcon.svg";
 import passwordIcon from "../assets/passwordIcon.svg";
+import photoIcon from "../assets/photoIcon.svg";
+import userIcon from "../assets/userIcon.svg";
+import Input from "../components/input/Input";
 
 function AuthPage() {
   const navigate = useNavigate();
@@ -123,56 +126,44 @@ function AuthPage() {
           className="flex flex-col text-gray-700 font-medium text-sm gap-6 xl:gap-4 w-full"
         >
           {activeTab === "cadastro" && (
-            <div className="flex flex-col  gap-2">
-              <label htmlFor="nome">Nome</label>
-              <input
-                id="nome"
-                type="text"
-                name="nome"
-                value={user.nome}
-                onChange={(e) => handleInputChange(e)}
-                placeholder="Digite o seu nome"
-                className="border rounded border-gray-300 p-3.5 "
-                required
-              />
-            </div>
+            <Input
+              id="nome"
+              inputText="Nome"
+              type="text"
+              inputName="nome"
+              value={user.nome}
+              onChange={(e) => handleInputChange(e)}
+              placeholder="Digite o seu nome"
+              icon={userIcon}
+              alt="desenho de um cadeado"
+            />
           )}
 
           {activeTab === "cadastro" && (
-            <div className="flex flex-col  gap-2">
-              <label htmlFor="foto">foto</label>
-              <input
-                id="foto"
-                type="url"
-                name="foto"
-                value={user.foto}
-                onChange={(e) => handleInputChange(e)}
-                placeholder="https://foto.jpg"
-                className="border rounded border-gray-300 p-3.5"
-              />
-            </div>
+            <Input
+              id="foto"
+              inputText="foto"
+              type="url"
+              inputName="foto"
+              value={user.foto}
+              onChange={(e) => handleInputChange(e)}
+              placeholder="https://foto.jpg"
+              icon={photoIcon}
+              alt="desenho de um cadeado"
+            />
           )}
 
-          <div className="flex flex-col  gap-2 ">
-            <label htmlFor="email">E-mail</label>
-            <div className=" flex flex-col relative">
-              <input
-                id="email"
-                type="email"
-                name="usuario"
-                value={user.usuario}
-                onChange={(e) => handleInputChange(e)}
-                placeholder="        seu@email.com"
-                className="border rounded border-gray-300 p-3.5"
-                required
-              />
-              <img
-                className="absolute left-4 top-3"
-                src={emailIcon}
-                alt="desenho de um cadeado"
-              />
-            </div>
-          </div>
+          <Input
+            id="email"
+            inputText="E-mail"
+            type="email"
+            inputName="usuario"
+            value={user.usuario}
+            onChange={(e) => handleInputChange(e)}
+            placeholder="seu@email.com"
+            icon={emailIcon}
+            alt="desenho de um cadeado"
+          />
 
           <div className="flex flex-col gap-2">
             <div className="flex justify-between">
@@ -191,8 +182,8 @@ function AuthPage() {
                 name="senha"
                 value={user.senha}
                 onChange={(e) => handleInputChange(e)}
-                placeholder="       ********"
-                className="border rounded border-gray-300 p-3.5"
+                placeholder="********"
+                className="border rounded border-gray-300 py-3.5 px-12"
                 required
               />
               <img
@@ -226,9 +217,11 @@ function AuthPage() {
             {isLoading || isLoadingSignup ? (
               <ClipLoader color="#ffffff" size={16} />
             ) : (
-              "Entrar na plataforma"
+              <>
+                Entrar na plataforma
+                <img src={submitIcon} alt="" />
+              </>
             )}
-            <img src={submitIcon} alt="" />
           </button>
         </form>
       </div>

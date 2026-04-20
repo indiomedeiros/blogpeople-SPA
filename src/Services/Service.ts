@@ -4,10 +4,10 @@ import type { AxiosResponse } from "axios";
 
 export async function getRquest<T>(
   url: string,
-  data: object,
+  header: object,
   setData: Dispatch<SetStateAction<T>>,
 ): Promise<void> {
-  const response: AxiosResponse = await api.get(url, data);
+  const response: AxiosResponse = await api.get(url, header);
   setData(response.data);
 }
 
